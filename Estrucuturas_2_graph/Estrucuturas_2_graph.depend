@@ -1,0 +1,45 @@
+# depslib dependency file v1.0
+1433957701 source:e:\documents\sanpa\4 semestre\aed\estrucuturas_2_graph\main.cpp
+	<iostream>
+	"CGraph.h"
+	<vector>
+
+1433856386 e:\documents\sanpa\4 semestre\aed\estrucuturas_2_graph\cgraph.h
+	<vector>
+	<iostream>
+	<list>
+	"CNode.h"
+	"CEdge.h"
+
+1433854737 e:\documents\sanpa\4 semestre\aed\estrucuturas_2_graph\cnode.h
+	"CGraph.h"
+	<list>
+	<vector>
+	<iostream>
+
+1433282074 e:\documents\sanpa\4 semestre\aed\estrucuturas_2_graph\cedge.h
+	"CGraph.h"
+	<iostream>
+
+1433957768 source:f:\inteligenciaartificial\estrucuturas_2_graph\main.cpp
+	<iostream>
+	"CGraph.h"
+	<vector>
+
+1433856388 f:\inteligenciaartificial\estrucuturas_2_graph\cgraph.h
+	<vector>
+	<iostream>
+	<list>
+	"CNode.h"
+	"CEdge.h"
+
+1433854738 f:\inteligenciaartificial\estrucuturas_2_graph\cnode.h
+	"CGraph.h"
+	<list>
+	<vector>
+	<iostream>
+
+1433282076 f:\inteligenciaartificial\estrucuturas_2_graph\cedge.h
+	"CGraph.h"
+	<iostream>
+
