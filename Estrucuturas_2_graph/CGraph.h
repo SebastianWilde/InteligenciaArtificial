@@ -3,6 +3,8 @@
 #include <vector>
 #include <iostream>
 #include <list>
+#include <tuple>
+#include <math.h>
 #include "CNode.h"
 #include "CEdge.h"
 using namespace std;
@@ -29,7 +31,7 @@ class CGraph
     bool remove_nodo(Node*);
     CGraph();
     bool verificar();
-    virtual ~CGraph();
+    //virtual ~CGraph();
 };
 
 template <class N, class E>
@@ -39,15 +41,14 @@ CGraph<N,E>::CGraph()
 }
 
 
-template <class N, class E>
-CGraph<N,E>::~CGraph()
-{
-   /* int a=m_nodes.size();
-    for (int i=0;i<a;++i)
-        remove_nodo(m_nodes[0]);
-    //desconstructor
-    */
-}
+//template <class N, class E>
+//CGraph<N,E>::~CGraph()
+//{
+//    int a=m_nodes.size();
+//    for (int i=0;i<a;++i)
+//        remove_nodo(m_nodes[0]);
+//    //desconstructor
+//}
 
 template <class N, class E>
 bool CGraph<N,E>::Find_nodo(N x, NodoIterator &i)
@@ -79,6 +80,7 @@ template <class N, class E>
 bool CGraph<N,E>::insert_edge(E b, Node* n1, Node* n2, bool di)
 {
     EdgeIterator i;
+    b=sqrt(pow(get<0>(n1->m_dato)-get<0>(n2->m_dato),2)+pow(get<1>(n1->m_dato)-get<1>(n2->m_dato),2));
     if (Find_edge(n1,n2,b,di,i)) return 0;
     Edge*p;
     p=new Edge(b,n1,n2,di);
@@ -130,7 +132,7 @@ bool CGraph<N,E>::verificar()
     int cont2=0;
     for (int i=0;i<tam_nod_vec;++i)
     {
-        cout<<m_nodes[i]->m_dato<<" sus aristas son "<<m_nodes[i]->m_edges.size()<<endl;
+        cout<<get<0> (m_nodes[i]->m_dato)<<" sus aristas son "<<m_nodes[i]->m_edges.size()<<endl;
         if((m_nodes[i]->m_edges.size())%2!=0)
             cont+=1;
         else
