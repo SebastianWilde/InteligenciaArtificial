@@ -31,6 +31,8 @@ class CGraph
     bool remove_nodo(Node*);
     CGraph();
     bool verificar();
+    vector<N> Asterisco(Node* inicio, Node* fin);
+    void Ordenar(vector<vector<Node*> >& X, vector<tuple<float,float> >& Y);
     //virtual ~CGraph();
 };
 
@@ -83,9 +85,11 @@ bool CGraph<N,E>::insert_edge(E b, Node* n1, Node* n2, bool di)
     b=sqrt(pow(get<0>(n1->m_dato)-get<0>(n2->m_dato),2)+pow(get<1>(n1->m_dato)-get<1>(n2->m_dato),2));
     if (Find_edge(n1,n2,b,di,i)) return 0;
     Edge*p;
+    Edge*p2;
     p=new Edge(b,n1,n2,di);
+    p2=new Edge(b,n2,n1,di);
     n1->m_edges.push_back(p);
-    n2->m_edges.push_back(p);
+    n2->m_edges.push_back(p2);
     m_edges.push_back(p);
     return 1;
 }
@@ -141,5 +145,67 @@ bool CGraph<N,E>::verificar()
     if (cont==2) return 1;
     else if (cont2==m_nodes.size()) return 1;
     return 0;
+}
+template <class N, class E>
+void CGraph<N,E>::Ordenar(vector<vector<Node*> >& X, vector<tuple<float,float> >& Y)
+{
+    int j;
+    N temp;
+    vector<Node*> temp2;
+	for (int i = 0; i < Y.size(); i++)
+    {
+		j = i;
+		while (j > 0 && get<0>(Y[j])+get<1>(Y[j]) < get<0>(Y[j-1])+get<1>(Y[j-1]))
+		{
+            temp = Y[j];
+            Y[j] = Y[j-1];
+            Y[j-1] = temp;
+            temp2= X[j];
+            X[j] = X[j-1];
+            X[j-1] = temp2;
+            j--;
+        }
+    }
+}
+template <class N, class E>
+vector<N> CGraph<N,E>::Asterisco(Node* inicio,Node* fin)
+{
+    vector<vector<Node*> > Resp;
+    vector<tuple<float,float> > Calculos;
+    vector<Node*> pri;
+    pri.push_back(inicio);
+    tuple<float,float> dist(0,sqrt(pow(get<0>(inicio->m_dato)-get<0>(fin->m_dato),2)+pow(get<1>(inicio->m_dato)-get<1>(fin->m_dato),2)));
+    Calculos.push_back(dist);
+    Resp.push_back(pri);
+    Node* uso=inicio;
+    while(uso!=fin)
+    {
+        for(int i=0;i<Calculos.size();i++)
+        {
+            cout<<"("<<get<0>(Calculos[i])<<","<<get<1>(Calculos[i])<<")"<<";";
+        }
+        cout<<endl;
+        vector<Node*> tem (Resp[0]);
+        for(int i=0;i < uso->m_edges.size();i++)
+        {
+            Edge* nuevo = uso->m_edges[i];
+            tem.push_back(nuevo->m_nodes[1]);
+            get<0> (dist) = get<0>(Calculos[0])+nuevo->n_peso;
+            get<1> (dist) = sqrt(pow(get<0>(nuevo->m_nodes[1]->m_dato)-get<0>(fin->m_dato),2)+pow(get<1>(nuevo->m_nodes[1]->m_dato)-get<1>(fin->m_dato),2));
+            Resp.push_back(tem);
+            Calculos.push_back(dist);
+            tem.pop_back();
+        }
+        Resp.erase(Resp.begin());
+        Calculos.erase(Calculos.begin());
+        Ordenar(Resp,Calculos);
+        uso=Resp[0].back();
+    }
+    vector<N> Camino;
+    for(int i=0;i<Resp[0].size();i++)
+    {
+        Camino.push_back(Resp[0][i]->m_dato);
+    }
+    return Camino;
 }
 #endif // CGRAPH_H_INCLUDED

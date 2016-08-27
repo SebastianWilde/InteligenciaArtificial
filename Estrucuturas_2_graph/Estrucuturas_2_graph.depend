@@ -43,3 +43,28 @@
 	"CGraph.h"
 	<iostream>
 
+1472314396 source:d:\repos\inteligenciaartificial\estrucuturas_2_graph\main.cpp
+	<iostream>
+	"CGraph.h"
+	<vector>
+	<tuple>
+
+1472314484 d:\repos\inteligenciaartificial\estrucuturas_2_graph\cgraph.h
+	<vector>
+	<iostream>
+	<list>
+	<tuple>
+	<math.h>
+	"CNode.h"
+	"CEdge.h"
+
+1472268120 d:\repos\inteligenciaartificial\estrucuturas_2_graph\cnode.h
+	"CGraph.h"
+	<list>
+	<vector>
+	<iostream>
+
+1472268120 d:\repos\inteligenciaartificial\estrucuturas_2_graph\cedge.h
+	"CGraph.h"
+	<iostream>
+
