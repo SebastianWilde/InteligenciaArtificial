@@ -13,6 +13,7 @@ public:
     typedef typename G::Edge Edge;
     typedef typename G::EdgeSet::iterator EdgeIterator;
     N m_dato;
+    bool visitado;
     vector<Edge*> m_edges;
     CNode(N dat){
         m_dato=dat;

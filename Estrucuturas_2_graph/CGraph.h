@@ -3,6 +3,7 @@
 #include <vector>
 #include <iostream>
 #include <list>
+#include <stack>
 #include <tuple>
 #include <math.h>
 #include "CNode.h"
@@ -33,6 +34,7 @@ class CGraph
     bool verificar();
     vector<N> Asterisco(Node* inicio, Node* fin);
     void Ordenar(vector<vector<Node*> >& X, vector<tuple<float,float> >& Y);
+    vector<N> Busqueda_profundidad(Node* inicio, Node* fin);
     //virtual ~CGraph();
 };
 
@@ -146,6 +148,7 @@ bool CGraph<N,E>::verificar()
     else if (cont2==m_nodes.size()) return 1;
     return 0;
 }
+
 template <class N, class E>
 void CGraph<N,E>::Ordenar(vector<vector<Node*> >& X, vector<tuple<float,float> >& Y)
 {
@@ -167,6 +170,7 @@ void CGraph<N,E>::Ordenar(vector<vector<Node*> >& X, vector<tuple<float,float> >
         }
     }
 }
+
 template <class N, class E>
 vector<N> CGraph<N,E>::Asterisco(Node* inicio,Node* fin)
 {
@@ -208,4 +212,31 @@ vector<N> CGraph<N,E>::Asterisco(Node* inicio,Node* fin)
     }
     return Camino;
 }
+
+template <class N, class E>
+vector<N> CGraph<N,E>::Busqueda_profundidad(Node* inicio, Node* fin)
+{
+    stack<Node*> porevaluar;
+    vector<N> visitados;
+    porevaluar.push(inicio);
+    while(!porevaluar.empty())
+    {
+        auto aux = porevaluar.top();
+        aux->visitado = 1;
+        porevaluar.pop();
+        visitados.push_back(aux->m_dato);
+        if(aux->m_dato == fin->m_dato)
+            return visitados;
+        EdgeIterator j;
+        for (j=aux->m_edges.begin();j!=aux->m_edges.end();++j)
+        {
+            if (!(j!=aux->m_edges.end())) return visitados;
+            if(!(*j)->m_nodes[1]->visitado)
+                porevaluar.push((*j)->m_nodes[1]);
+        }
+    }
+    return visitados;
+}
+
+
 #endif // CGRAPH_H_INCLUDED
