@@ -1,6 +1,8 @@
 #ifndef FICHA_H_INCLUDED
 #define FICHA_H_INCLUDED
 #include <vector>
+#include <iostream>
+using namespace std;
 struct Ficha
 {
     char ficha;
@@ -18,6 +20,10 @@ struct Ficha
         posx=x;
         posy=y;
         return;
+    }
+    void Print()
+    {
+        cout<<endl<<"Ficha: "<<posx<<" , "<<posy<<endl;
     }
 };
 
