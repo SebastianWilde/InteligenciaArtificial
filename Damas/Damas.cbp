@@ -33,6 +33,7 @@
 			<Add option="-fexceptions" />
 		</Compiler>
 		<Unit filename="Ficha.h" />
+		<Unit filename="Nodo.h" />
 		<Unit filename="Tablero.h" />
 		<Unit filename="main.cpp" />
 		<Extensions>

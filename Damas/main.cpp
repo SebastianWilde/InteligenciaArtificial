@@ -8,7 +8,12 @@ int main()
 
     Tablero Tab(6);
     Tab.PrintTablero();
-    Tab.Jugar(0);
+    bool turno=0;
+    while (!Tab.Fin)
+    {
+        cout<<endl<<"El turno es de: "<<turno<<endl;
+        Tab.Jugar(turno);
+    }
     cout << endl << "Hello world!" << endl;
     return 0;
 }

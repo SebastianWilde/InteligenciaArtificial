@@ -17,8 +17,10 @@ class Tablero
     void ActulizarTablero(); //Coloca las fichas de los vectores en el tablero y tambien se usa para actualizar
     Tablero(int);
     void operator=(Tablero); // Para poder crear copias del tablero
-    void Jugar(bool); //0 jugador 1, 1 -> jugador 2
+    void Jugar(bool&); //0 jugador 1, 1 -> jugador 2
     int BuscarFicha(vector<Ficha*>,int ,int ); //Buscar la ficha en un determinado vector por fila y columna
+    bool MoverFicha(vector<Ficha*>,int,bool,bool);//Mover ficha, iteracion de ficha, izquierda 0,derecha 1, 0->jugador1
+                                                //1->jugador2
 };
 Tablero::Tablero(int Size)
 {
@@ -101,24 +103,69 @@ void Tablero::operator=(Tablero A)
 int Tablero::BuscarFicha(vector<Ficha*>vec,int fil,int col)
 {
     int i;
-    for (i=0;(i<tam)&&( (vec[i]->posx!=col) || (vec[i]->posy!=fil) );i++);
-    if (i==tam) i=-1;
+    for (i=0;(i<(int)vec.size())&&( (vec[i]->posx!=col) || (vec[i]->posy!=fil) );i++);
+    if (i==(int)vec.size()) i=-1;
     return i;
 }
-void Tablero::Jugar(bool turno)
+bool Tablero::MoverFicha(vector<Ficha*>vec,int i, bool movida,bool jugador)
 {
-    int fila,col,x,y;
+    int direccion,sentido; //direccion->si se mueve hacia abajo o hacia arriba || sentido izquierda o derecha
+    if (jugador==0) direccion=1;
+    else direccion=-1;
+    if (movida==0) sentido=-1;
+    else sentido=1;
+    int new_x=vec[i]->posx+(1*sentido);
+    int new_y=vec[i]->posy+(1*direccion);
+    cout<<endl<<new_x<<" "<<new_y<<endl;
+        if (!((new_y>=0)&&(new_y<tam)&&(new_x>=0)&&(new_x<tam))
+            || Tabla[new_y][new_x]==vec[i]->ficha)//Si se sale del tablero o ya hay una ficha suya ahi
+        {
+        cout<<endl<<"Fuera del tablero o posicion ocupada - "<<"Jugada imposible"<<endl;
+        return 0;
+        }
+        if(Tabla[new_y][new_x]!=' ')
+        {
+            int new_x_2=vec[i]->posx+(2*sentido);
+            int new_y_2=vec[i]->posy+(2*direccion);
+            if (!((new_y_2>=0)&&(new_y_2<tam)&&(new_x_2>=0)&&(new_x_2<tam))
+                || Tabla[new_y_2][new_x_2]!=' ') //Si al comer ficha se sale de tablero o hay dos fichas enemigas juntas
+            {
+                cout<<"Jugada imposible"<<endl;
+                return 0;
+            }
+            else
+            {
+                int aux;//Para localizar la ficha que sera eliminada
+                if(jugador==0)
+                {
+                    aux=BuscarFicha(Jugador2,new_y,new_x);
+                    Jugador2.erase(Jugador2.begin()+aux);
+                }
+                else
+                {
+                    aux=BuscarFicha(Jugador1,new_y,new_x);
+                    Jugador1.erase(Jugador1.begin()+aux);
+                }
+                vec[i]->posx=new_x_2;
+                vec[i]->posy=new_y_2;
+                return 1;
+            }
+        }
+        vec[i]->posx=new_x;
+        vec[i]->posy=new_y;
+        return 1;
+}
+void Tablero::Jugar(bool &turno)
+{
+    int fila,col;
+    bool mov;
     cout<<"Fila: ";
     cin>>fila;
     cout<<"Columna: ";
     cin>>col;
-    cout<<"Mover a fila: ";
-    cin>>y;
-    cout<<"Mover a columna: ";
-    cin>>x;
+    cout<<"0) Izquierda" << endl<<"1) Derecha"<<endl;
+    cin>>mov;
     int posicion;
-    if ((y>=0)&&(y<tam)&&(x>=0)&&(x<tam))
-    {
         if (turno==0)
         {
             posicion=BuscarFicha(Jugador1,fila,col);
@@ -127,8 +174,11 @@ void Tablero::Jugar(bool turno)
                 cout<<"ficha no encontrada";
                 return;
             }
-            Jugador1[posicion]->posx=x;
-            Jugador1[posicion]->posy=y;
+            if(MoverFicha(Jugador1,posicion,mov,turno)==0)
+            {
+                cout<<endl<<"Jugada imposible"<<endl;
+                return;
+            }
         }
         else
         {
@@ -138,13 +188,15 @@ void Tablero::Jugar(bool turno)
                 cout<<"ficha no encontrada";
                 return;
             }
-            Jugador2[posicion]->posx=x;
-            Jugador2[posicion]->posy=y;
+            if (MoverFicha(Jugador2,posicion,mov,turno)==0)
+            {
+                cout<<endl<<"Jugada imposible"<<endl;
+                return;
+            }
         }
- //       ActulizarTablero();
+        turno^=1;
+        if(Jugador1.size()==0 || Jugador2.size()==0) Fin=1;
         PrintTablero();
-    }
-    cout<<"Jugada imposible"<<endl;
-    return;
+        return;
 }
 #endif // TABLERO_H_INCLUDED

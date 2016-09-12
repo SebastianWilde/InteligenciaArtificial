@@ -1,10 +1,10 @@
 # depslib dependency file v1.0
-1473650475 source:f:\sebastian\documents\sanpa\7semestre\inteligenciaartificial\practica\inteligenciaartificial\damas\main.cpp
+1473651795 source:f:\sebastian\documents\sanpa\7semestre\inteligenciaartificial\practica\inteligenciaartificial\damas\main.cpp
 	<iostream>
 	<vector>
 	"Tablero.h"
 
-1473650525 f:\sebastian\documents\sanpa\7semestre\inteligenciaartificial\practica\inteligenciaartificial\damas\tablero.h
+1473656808 f:\sebastian\documents\sanpa\7semestre\inteligenciaartificial\practica\inteligenciaartificial\damas\tablero.h
 	<iostream>
 	"Ficha.h"
 	<string>
