@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include "Tablero.h"
+#include "Tree.h"
 using namespace std;
 
 int main()
@@ -8,7 +9,8 @@ int main()
 
     Tablero Tab(6);
     Tab.PrintTablero();
-    bool turno=0;
+    Tab.turno=1;
+    bool turno=1;
     while (!Tab.Fin)
     {
         cout<<endl<<"El turno es de: "<<turno<<endl;

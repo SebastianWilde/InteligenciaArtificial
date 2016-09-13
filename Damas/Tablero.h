@@ -110,17 +110,17 @@ int Tablero::BuscarFicha(vector<Ficha*>vec,int fil,int col)
 bool Tablero::MoverFicha(vector<Ficha*>vec,int i, bool movida,bool jugador)
 {
     int direccion,sentido; //direccion->si se mueve hacia abajo o hacia arriba || sentido izquierda o derecha
-    if (jugador==0) direccion=1;
+    if (jugador==0) direccion=1; //La ficha se mueve hacia abajo
     else direccion=-1;
-    if (movida==0) sentido=-1;
+    if (movida==0) sentido=-1; //La ficha se mueve hacia la derecha
     else sentido=1;
     int new_x=vec[i]->posx+(1*sentido);
     int new_y=vec[i]->posy+(1*direccion);
-    cout<<endl<<new_x<<" "<<new_y<<endl;
+//    cout<<endl<<new_x<<" "<<new_y<<endl;
         if (!((new_y>=0)&&(new_y<tam)&&(new_x>=0)&&(new_x<tam))
             || Tabla[new_y][new_x]==vec[i]->ficha)//Si se sale del tablero o ya hay una ficha suya ahi
         {
-        cout<<endl<<"Fuera del tablero o posicion ocupada - "<<"Jugada imposible"<<endl;
+        //cout<<endl<<"Fuera del tablero o posicion ocupada - "<<"Jugada imposible"<<endl;
         return 0;
         }
         if(Tabla[new_y][new_x]!=' ')
@@ -130,7 +130,7 @@ bool Tablero::MoverFicha(vector<Ficha*>vec,int i, bool movida,bool jugador)
             if (!((new_y_2>=0)&&(new_y_2<tam)&&(new_x_2>=0)&&(new_x_2<tam))
                 || Tabla[new_y_2][new_x_2]!=' ') //Si al comer ficha se sale de tablero o hay dos fichas enemigas juntas
             {
-                cout<<"Jugada imposible"<<endl;
+                //cout<<"Jugada imposible"<<endl;
                 return 0;
             }
             else
@@ -155,6 +155,8 @@ bool Tablero::MoverFicha(vector<Ficha*>vec,int i, bool movida,bool jugador)
         vec[i]->posy=new_y;
         return 1;
 }
+#include "Tree.h"
+#include "Nodo.h"
 void Tablero::Jugar(bool &turno)
 {
     int fila,col;
@@ -166,21 +168,26 @@ void Tablero::Jugar(bool &turno)
     cout<<"0) Izquierda" << endl<<"1) Derecha"<<endl;
     cin>>mov;
     int posicion;
-        if (turno==0)
+        if (turno==0)/*Aqui viene el turno de la maquina*/
         {
-            posicion=BuscarFicha(Jugador1,fila,col);
+            Tree Aux(*this,tam);
+            //Aux.Print();
+            Nodo* J1move = Aux.minimax(Aux.root,turno);
+            cout<<J1move->Who_move<<" // "<<J1move->where_move<<endl;
+            /*posicion=BuscarFicha(Jugador1,fila,col);
             if (posicion==-1)
             {
-                cout<<"ficha no encontrada";
+                //cout<<"ficha no encontrada";
                 return;
-            }
-            if(MoverFicha(Jugador1,posicion,mov,turno)==0)
+            }*/
+            //if(MoverFicha(Jugador1,posicion,mov,turno)==0)
+            if(MoverFicha(Jugador1,J1move->Who_move,J1move->where_move,turno)==0)
             {
                 cout<<endl<<"Jugada imposible"<<endl;
                 return;
             }
         }
-        else
+        else /*Turno del jugador*/
         {
             posicion=BuscarFicha(Jugador2,fila,col);
             if (posicion==-1)
@@ -194,7 +201,7 @@ void Tablero::Jugar(bool &turno)
                 return;
             }
         }
-        turno^=1;
+        turno^=1; /*Para que se cambie de turno ^ ->  es un XOR*/
         if(Jugador1.size()==0 || Jugador2.size()==0) Fin=1;
         PrintTablero();
         return;

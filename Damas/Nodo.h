@@ -6,10 +6,29 @@
 using namespace std;
 struct Nodo
 {
-    Tablero Tab;
     Nodo* To_Padre;
     vector<Nodo*> hijos;
-    bool Identificador; //Saber si es donde se hace min o max
-    int MinMax; //Valor MinMax Optenido
+    //typedef Tablero Tablero;
+    Tablero *Tab;
+    bool Whom_move; //Saber si se mueven las fichas de la maquina (0) o del jugador (1)
+    int heruristica; //Resta entre las fichas de la maquina y del jugador
+    int Who_move; //Saber que ficha se mueve
+    bool where_move;//Saber hacia donde se mueve, izquierda o derecha
+    Nodo(){}
+    Nodo(Tablero T)
+    {
+        Tab=new Tablero(T.tam);
+        *Tab=T;
+        heruristica=Tab->Jugador1.size()-Tab->Jugador1.size();
+    }
+    Nodo(Tablero T, bool whom,int who, bool where)
+    {
+        Tab=new Tablero(T.tam);
+        *Tab=T;
+        heruristica=Tab->Jugador1.size()-Tab->Jugador1.size();
+        Whom_move=whom;
+        Who_move=who;
+        where_move=where;
+    }
 };
 #endif // NODO_H_INCLUDED

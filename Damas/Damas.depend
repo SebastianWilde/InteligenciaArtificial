@@ -1,14 +1,54 @@
 # depslib dependency file v1.0
-1473651795 source:f:\sebastian\documents\sanpa\7semestre\inteligenciaartificial\practica\inteligenciaartificial\damas\main.cpp
+1473702448 source:f:\sebastian\documents\sanpa\7semestre\inteligenciaartificial\practica\inteligenciaartificial\damas\main.cpp
 	<iostream>
 	<vector>
 	"Tablero.h"
+	"Tree.h"
 
-1473656808 f:\sebastian\documents\sanpa\7semestre\inteligenciaartificial\practica\inteligenciaartificial\damas\tablero.h
+1473704900 f:\sebastian\documents\sanpa\7semestre\inteligenciaartificial\practica\inteligenciaartificial\damas\tablero.h
 	<iostream>
 	"Ficha.h"
 	<string>
+	"Tree.h"
 
-1473644665 f:\sebastian\documents\sanpa\7semestre\inteligenciaartificial\practica\inteligenciaartificial\damas\ficha.h
+1473703412 f:\sebastian\documents\sanpa\7semestre\inteligenciaartificial\practica\inteligenciaartificial\damas\ficha.h
+	<vector>
+	<iostream>
+
+1473705602 f:\sebastian\documents\sanpa\7semestre\inteligenciaartificial\practica\inteligenciaartificial\damas\tree.h
+	<iostream>
+	"Nodo.h"
+	<vector>
+
+1473702640 f:\sebastian\documents\sanpa\7semestre\inteligenciaartificial\practica\inteligenciaartificial\damas\nodo.h
+	<iostream>
+	"Tablero.h"
+	<vector>
+
+1473752250 source:d:\gitprojects\inteligenciaartificial\damas\main.cpp
+	<iostream>
+	<vector>
+	"Tablero.h"
+	"Tree.h"
+
+1473752298 d:\gitprojects\inteligenciaartificial\damas\tablero.h
+	<iostream>
+	"Ficha.h"
+	<string>
+	"Tree.h"
+	"Nodo.h"
+
+1473737837 d:\gitprojects\inteligenciaartificial\damas\ficha.h
+	<vector>
+	<iostream>
+
+1473752052 d:\gitprojects\inteligenciaartificial\damas\tree.h
+	<iostream>
+	"Nodo.h"
+	<vector>
+
+1473751220 d:\gitprojects\inteligenciaartificial\damas\nodo.h
+	<iostream>
+	"Tablero.h"
 	<vector>
 
