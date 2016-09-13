@@ -76,8 +76,12 @@ void Tablero::PrintTablero()
 {
     ActulizarTablero();
     cout<<endl;
-    cout<<"0|1|2|3|4|5|"<<endl;
-    cout<<"------------"<<endl;
+    for(int i=0;i<tam;i++)
+        cout<<i<<"|";
+    cout<<endl;
+    for(int i=0;i<tam;i++)
+        cout<<"--";
+    cout<<endl;
     for (int i=0;i<tam;i++)
     {
         for (int j=0;j<tam;j++)

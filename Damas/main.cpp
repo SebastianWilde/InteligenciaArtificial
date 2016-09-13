@@ -7,7 +7,7 @@ using namespace std;
 int main()
 {
 
-    Tablero Tab(6);
+    Tablero Tab(8);
     Tab.PrintTablero();
     bool turno=0;
     while (Tab.Fin==0)
