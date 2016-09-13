@@ -10,7 +10,7 @@ int main()
     Tablero Tab(6);
     Tab.PrintTablero();
     bool turno=0;
-    while (!Tab.Fin)
+    while (Tab.Fin==0)
     {
         cout<<endl<<"El turno es de: "<<turno<<endl;
         Tab.Jugar(turno);

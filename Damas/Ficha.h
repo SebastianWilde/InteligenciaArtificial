@@ -23,7 +23,7 @@ struct Ficha
     }
     void Print()
     {
-        cout<<endl<<"Ficha: "<<posx<<" , "<<posy<<endl;
+        cout<<endl<<"Ficha: "<<posx<<" , "<<posy<<": "<<ficha<<endl;
     }
 };
 

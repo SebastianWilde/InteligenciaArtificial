@@ -14,6 +14,8 @@ struct Nodo
     int heruristica; //Resta entre las fichas de la maquina y del jugador
     int Who_move; //Saber que ficha se mueve
     bool where_move;//Saber hacia donde se mueve, izquierda o derecha
+//    int MinMax;//Valor de minmax
+    Nodo(){}
     Nodo(Tablero T)
     {
         Tab=new Tablero(T.tam);
@@ -26,8 +28,22 @@ struct Nodo
         *Tab=T;
         heruristica=Tab->Jugador1.size()-Tab->Jugador1.size();
         Whom_move=whom;
-        Whom_move=who;
+        Who_move=who;
         where_move=where;
+    }
+    int Mayor()
+    {
+        int mayor=0;
+        for(int i=1;i<(int)hijos.size();i++)
+            if (hijos[i]->heruristica>hijos[mayor]->heruristica) mayor=i;
+        return mayor;
+    }
+    int Menor()
+    {
+        int menor=0;
+        for(int i=1;i<(int)hijos.size();i++)
+            if (hijos[i]->heruristica>hijos[menor]->heruristica) menor=i;
+        return menor;
     }
 };
 #endif // NODO_H_INCLUDED
