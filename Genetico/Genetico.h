@@ -4,8 +4,8 @@ using namespace std;
 class Genetico
 {
     typedef int(*Puntero_funcion)(int);
-    typedef vector<bitset<5> > Lista;
-    typedef bitset<5> Bits;
+    typedef vector<bitset<6> > Lista;
+    typedef bitset<6> Bits;
     Lista poblacion;
     int Tam_Poblacion;
     int Iteraciones;
@@ -27,9 +27,9 @@ void Genetico::generar_poblacion()
 {
     for(int i=0;i<Tam_Poblacion;i++)
     {
-        Bits num(rand()%32);
+        Bits num(rand()%55);
         poblacion.push_back(num);
-
+        cout<<num<<endl;
     }
 }
 Genetico::Lista Genetico::seleccion()
@@ -64,8 +64,7 @@ Genetico::Lista Genetico::seleccion()
     {
         for(int i=Vector_Cruce.size();i<Tam_Poblacion;i++)
         {
-            Bits num(rand()%32);
-            Vector_Cruce.push_back(num);
+            Vector_Cruce.push_back(Vector_Cruce[0]);
         }
     }
     return Vector_Cruce;
@@ -77,10 +76,10 @@ Genetico::Lista Genetico::Cruzamiento(Lista X)
     {
         if(i+1<Tam_Poblacion)
         {
-            int separacion=rand()%4;
+            int separacion=rand()%5;
             Bits temp1=X[i];
             Bits temp2=X[i+1];
-            for(int j=separacion+1;j<5;j++)
+            for(int j=separacion+1;j<6;j++)
             {
                 int tem=temp1[j];
                 temp1[j]=temp2[j];
@@ -97,14 +96,26 @@ Genetico::Lista Genetico::Empezar()
     generar_poblacion();
     for(int i=0;i<Iteraciones;i++)
     {
-        cout<<"Poblacion Actual"<<endl;
+        /*cout<<"Poblacion Actual"<<endl;
         for(int i=0;i<poblacion.size();i++)
         {
             cout<<poblacion[i]<<" = "<<poblacion[i].to_ulong()<<endl;
-        }
+        }*/
         Lista Vector_Cruce=seleccion();
         poblacion.clear();
         poblacion=Cruzamiento(Vector_Cruce);
+        long max=0;
+        int maxm=0;
+        for(int i=0;i<poblacion.size();i++)
+        {
+            int num=(*Funcion)(poblacion[i].to_ulong());
+            if(max<num)
+            {
+                max=num;
+                maxm=poblacion[i].to_ulong();
+            }
+        }
+        cout<<"Maximo de la iteracion = "<<maxm<<endl;
     }
     return poblacion;
 }

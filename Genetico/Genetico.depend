@@ -10,3 +10,25 @@
 	<vector>
 	<bitset>
 
+1475021132 source:c:\users\alumno-g\desktop\inteligenciaartificial-master\genetico\main.cpp
+	<iostream>
+	<stdlib.h>
+	<time.h>
+	<cmath>
+	"Genetico.h"
+
+1475021125 c:\users\alumno-g\desktop\inteligenciaartificial-master\genetico\genetico.h
+	<vector>
+	<bitset>
+
+1475021134 source:d:\repos\inteligenciaartificial\genetico\main.cpp
+	<iostream>
+	<stdlib.h>
+	<time.h>
+	<cmath>
+	"Genetico.h"
+
+1475021126 d:\repos\inteligenciaartificial\genetico\genetico.h
+	<vector>
+	<bitset>
+
